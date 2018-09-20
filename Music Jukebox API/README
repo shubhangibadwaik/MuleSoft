@@ -3,4 +3,6 @@ Use Case - Design Music JukeBox API
 The API should be able to:
 
 1. Get a list of songs.
-2. 
+2. Get a particular song.
+3. Add a particular song.
+
