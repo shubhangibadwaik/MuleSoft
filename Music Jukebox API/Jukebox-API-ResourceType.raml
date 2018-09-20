@@ -1,0 +1,28 @@
+#%RAML 1.0
+baseUri: https://mocksvc.mulesoft.com/mocks/09738ccd-67ea-4b8b-b842-f5f7ea6d5002 # 
+title: Jukebox-API-ResourceType
+version: v1.0
+
+resourceTypes:
+  collection: !include resourceTypes/CollectionResourceType.raml
+
+traits:
+  searchable: !include traits/SearchableTrait.raml
+
+types:
+  song: !include dataTypes/SongDataType.raml
+
+/songs:
+  type: collection      #Resource inherits from Collection Resource Type
+  get:
+    is: [searchable: {description: , example: }]
+    responses:          #This part of code is repetitive. To avoid this, define parameters at the Resource level. Refer: Jukebox-API-ResourceParameters
+      200:
+        body:
+          application/json:
+            type: song[]
+            example: !include examples/SongsExample.raml
+  post:
+    body:
+      application/json:
+        example: !include examples/SongToAddExample.raml

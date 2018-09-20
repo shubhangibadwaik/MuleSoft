@@ -1,0 +1,21 @@
+#%RAML 1.0 ResourceType
+
+usage: Defines the Collection Item
+description: Entity representing a <<resourcePathName | !singularize>>
+get:
+  description: |
+    Get the <<resourcePathName | !singularize>> 
+    with <<resourcePathName | !singularize>>Id =
+    {<<resourcePathName | !singularize>>Id}
+  responses:
+    200:
+      body:
+        application/json:
+          type: <<resourcePathName | !singularize>>
+          example: <<exampleItem>>
+    404:
+      body:
+        application/json:
+          example: {
+            "message": "<<resourcePathName | !singularize | !upperCamelCase>> not found"
+          }

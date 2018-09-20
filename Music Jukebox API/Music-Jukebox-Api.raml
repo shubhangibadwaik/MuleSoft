@@ -1,0 +1,62 @@
+#%RAML 1.0
+title: RAML 200 Tutorial - Music Jukebox API
+version: v1.0
+mediaType: [application/json, application/xml]
+securedBy: [oauth_2_0]                     #All methods are secured by OAuth 2.0
+securitySchemes:
+  oauth_2_0:
+    type: OAuth 2.0
+    describedBy:                         #Specifies security-related components
+      headers:
+        Authorization:
+          description: Used to send a valid OAuth 2 access Token. Do not use with the "access_token" query string parameter.
+          type: string
+       
+
+
+types:
+  Song: !include dataTypes/SongDataType.raml
+
+/songs/{songId}/albums:
+  description: Collection of available songs in Jukebox.
+  get:
+    description: Get a list of songs.
+    responses:
+      200:
+        body:
+          application/json:
+            type: Song[]
+            example: !include examples/SongsExample.raml
+  post:
+      description: Add a song in the collection of Jukebox.
+      body:
+        example: !include examples/SongByIdExample.raml
+      responses:
+        201:
+          body:
+            example: {
+              "message": "Song added to the collection (but not really)!"
+            }
+  /{songId}:
+    description: Song Entity
+    uriParameters:
+      songId: 
+        description: Id of the song.
+        type: string
+    get:
+      description: Get song with songId = {songId}
+      responses:
+        200:
+          body:
+            application/json:
+              type: Song
+              example: !include examples/SongByIdExample.raml
+        404:
+          body:
+            application/json:
+              example: {
+                "message": "Song not found."
+              }
+        
+     
+

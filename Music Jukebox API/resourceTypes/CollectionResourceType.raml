@@ -1,0 +1,44 @@
+#%RAML 1.0 ResourceType
+#Resource Types have two Reserved Parameters: <<resourcePath>> and <<resourcePathName>>
+#For /songs example the value will be '/songs' and 'songs' respectively.
+#Reserved Parameters act as a placeholder for the resource to be defined.
+
+#Parameters Transformers such as !singularize, !pluralize can be used with reserved parameters.
+
+#Resource Types let you define reusable patterns for the code.
+#Resource Type applies to a resource, whereas Trait applies to a method.
+
+#Resource Types and Resources, Traits and Methods are related through an inheritance chain.
+
+#A Resource Type definition MUST NOT incorporate nested resources. Also, they cannot be used to generate nested resources.
+
+#A Resource or Resource Type can inherit from a single Resource Type.
+
+#Can a method, resource, resource type inherit from one or more traits? - Yes
+
+
+description: Collection of available <<resourcePathName>> in Jukebox.  
+
+get:
+  description: Get a list of <<resourcePathName>>.
+  responses:
+    200:
+      body:
+        application/json:
+          example: <<exampleCollection>>
+post:
+  description: Add a <<resourcePathName | !singularize>> in the collection.
+  body:
+    application/json:
+      type: <<resourcePathName | !singularize>>
+      example: <<exampleItemToAdd>>
+  responses:
+    201:
+      body:
+        application/json:
+          example: {
+            "message": "<<resourcePathName | !singularize | !upperCamelCase>> has been added to the collection (but not really)"
+          }
+  
+
+

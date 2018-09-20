@@ -1,0 +1,16 @@
+#%RAML 1.0
+baseUri: https://mocksvc.mulesoft.com/mocks/38964c8f-b26b-4ec6-897c-2e10bae770ad # 
+title: TestExtension
+
+types:
+  Vehicle:
+    type: string
+    example: "Lamborgini"
+
+/vehicles:
+  get:
+    responses:
+      200:
+        body:
+          application/json:
+            type: Vehicle

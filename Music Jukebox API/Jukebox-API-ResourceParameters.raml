@@ -1,0 +1,24 @@
+#%RAML 1.0
+baseUri: https://mocksvc.mulesoft.com/mocks/d5900f9d-69f6-417e-943f-4db9e7ff741b # 
+title: Jukebox-API-ResourceParameters
+#Define Parameters at the Resource Level. This is different then having Reserved Parameters in Resource Type.
+version: v1.0
+
+resourceTypes:
+  collection: !include resourceTypes/CollectionResourceType.raml
+  collection-item: !include resourceTypes/CollectionItemResourceType.raml
+
+types:
+  song: !include dataTypes/SongDataType.raml
+
+/songs:
+  type: 
+    collection:             #Resource Type: collection applies only for /songs resource                        
+      exampleCollection: !include examples/SongsExample.raml   #Define Parameter
+      exampleItemToAdd: !include examples/SongToAddExample.raml
+  /{songId}:
+    type:
+      collection-item:
+        exampleItem: !include examples/SongByIdExample.raml
+     
+  
